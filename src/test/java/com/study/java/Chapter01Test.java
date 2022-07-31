@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.study.java.enums.Color;
+import com.study.java.interfaces.ApplePredicate;
 import com.study.java.model.Apple;
 import com.study.java.model.AppleGreenColorPredicate;
 import com.study.java.model.AppleHeavyWeightPredicate;
@@ -69,6 +70,29 @@ public class Chapter01Test {
 		System.out.println(heavyApples);
 
 		assertThat(greenApples).hasSize(2);
+		assertThat(heavyApples).hasSize(2);
+	}
+
+	@Test
+	void filterApplesAnonymousClass() {
+		List<Apple> redApples = Apple.filterApples(apples, new ApplePredicate() {
+			@Override
+			public boolean test(final Apple apple) {
+				return Color.RED.equals(apple.getColor());
+			}
+		});
+
+		List<Apple> heavyApples = Apple.filterApples(apples, new ApplePredicate() {
+			@Override
+			public boolean test(final Apple apple) {
+				return apple.getWeight() > 150;
+			}
+		});
+
+		System.out.println(redApples);
+		System.out.println(heavyApples);
+
+		assertThat(redApples).hasSize(3);
 		assertThat(heavyApples).hasSize(2);
 	}
 }
