@@ -95,4 +95,16 @@ public class Chapter01Test {
 		assertThat(redApples).hasSize(3);
 		assertThat(heavyApples).hasSize(2);
 	}
+
+	@Test
+	void filterApplesLambda() {
+		List<Apple> redApples = Apple.filterApples(apples, apple -> apple.getColor().equals(Color.RED));
+		List<Apple> heavyApples = Apple.filterApples(apples, apple -> apple.getWeight() > 150);
+
+		System.out.println(redApples);
+		System.out.println(heavyApples);
+
+		assertThat(redApples).hasSize(3);
+		assertThat(heavyApples).hasSize(2);
+	}
 }
