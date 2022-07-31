@@ -20,11 +20,11 @@ public class Chapter01Test {
 
 	@BeforeEach
 	void setUp() {
-		apples.add(Apple.builder().color(Color.RED).build());
-		apples.add(Apple.builder().color(Color.RED).build());
-		apples.add(Apple.builder().color(Color.GREEN).build());
-		apples.add(Apple.builder().color(Color.GREEN).build());
-		apples.add(Apple.builder().color(Color.RED).build());
+		apples.add(Apple.builder().color(Color.RED).weight(40).build());
+		apples.add(Apple.builder().color(Color.RED).weight(80).build());
+		apples.add(Apple.builder().color(Color.GREEN).weight(120).build());
+		apples.add(Apple.builder().color(Color.GREEN).weight(160).build());
+		apples.add(Apple.builder().color(Color.RED).weight(200).build());
 	}
 
 	@Test
@@ -44,5 +44,17 @@ public class Chapter01Test {
 
 		assertThat(greenApples).hasSize(2);
 		assertThat(redApples).hasSize(3);
+	}
+
+	@Test
+	void filterColor() {
+		List<Apple> greenApples = Apple.filterApples(apples, Color.GREEN, 0, true);
+		List<Apple> heavyApples = Apple.filterApples(apples, null, 150, false);
+
+		System.out.println(greenApples);
+		System.out.println(heavyApples);
+
+		assertThat(greenApples).hasSize(2);
+		assertThat(heavyApples).hasSize(2);
 	}
 }
