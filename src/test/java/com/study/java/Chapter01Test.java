@@ -47,7 +47,7 @@ public class Chapter01Test {
 	}
 
 	@Test
-	void filterColor() {
+	void filterApples() {
 		List<Apple> greenApples = Apple.filterApples(apples, Color.GREEN, 0, true);
 		List<Apple> heavyApples = Apple.filterApples(apples, null, 150, false);
 
