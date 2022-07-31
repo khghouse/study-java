@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.study.java.enums.Color;
+import com.study.java.interfaces.ApplePredicate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,6 +45,16 @@ public class Apple {
 		List<Apple> result = new ArrayList<Apple>();
 		for (Apple apple : inventory) {
 			if ((flag && apple.getColor().equals(color)) || (!flag && apple.getWeight() > weight)) {
+				result.add(apple);
+			}
+		}
+		return result;
+	}
+
+	public static List<Apple> filterApples(final List<Apple> inventory, final ApplePredicate p) {
+		List<Apple> result = new ArrayList<Apple>();
+		for (Apple apple : inventory) {
+			if (p.test(apple)) {
 				result.add(apple);
 			}
 		}
