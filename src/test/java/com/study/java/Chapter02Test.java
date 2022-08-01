@@ -18,7 +18,7 @@ import com.study.java.model.AppleGreenColorPredicate;
 import com.study.java.model.AppleHeavyWeightPredicate;
 
 @ExtendWith(MockitoExtension.class)
-public class Chapter01Test {
+public class Chapter02Test {
 
 	List<Apple> apples = new ArrayList<Apple>();
 	List<Integer> numbers = Arrays.asList(1, 2, 4, 6, 7, 8, 9, 10, 12);
@@ -35,7 +35,6 @@ public class Chapter01Test {
 	@Test
 	void filterGreenApples() {
 		List<Apple> greenApples = Apple.filterGreenApples(apples);
-		System.out.println(greenApples);
 		assertThat(greenApples).hasSize(2);
 	}
 
@@ -43,9 +42,6 @@ public class Chapter01Test {
 	void filterApplesByColor() {
 		List<Apple> greenApples = Apple.filterApplesByColor(apples, Color.GREEN);
 		List<Apple> redApples = Apple.filterApplesByColor(apples, Color.RED);
-
-		System.out.println(greenApples);
-		System.out.println(redApples);
 
 		assertThat(greenApples).hasSize(2);
 		assertThat(redApples).hasSize(3);
@@ -56,9 +52,6 @@ public class Chapter01Test {
 		List<Apple> greenApples = Apple.filterApples(apples, Color.GREEN, 0, true);
 		List<Apple> heavyApples = Apple.filterApples(apples, null, 150, false);
 
-		System.out.println(greenApples);
-		System.out.println(heavyApples);
-
 		assertThat(greenApples).hasSize(2);
 		assertThat(heavyApples).hasSize(2);
 	}
@@ -67,9 +60,6 @@ public class Chapter01Test {
 	void filterApplesPredicate() {
 		List<Apple> greenApples = Apple.filterApples(apples, new AppleGreenColorPredicate());
 		List<Apple> heavyApples = Apple.filterApples(apples, new AppleHeavyWeightPredicate());
-
-		System.out.println(greenApples);
-		System.out.println(heavyApples);
 
 		assertThat(greenApples).hasSize(2);
 		assertThat(heavyApples).hasSize(2);
@@ -91,9 +81,6 @@ public class Chapter01Test {
 			}
 		});
 
-		System.out.println(redApples);
-		System.out.println(heavyApples);
-
 		assertThat(redApples).hasSize(3);
 		assertThat(heavyApples).hasSize(2);
 	}
@@ -102,9 +89,6 @@ public class Chapter01Test {
 	void filterApplesLambda() {
 		List<Apple> redApples = Apple.filterApples(apples, apple -> apple.getColor().equals(Color.RED));
 		List<Apple> heavyApples = Apple.filterApples(apples, apple -> apple.getWeight() > 150);
-
-		System.out.println(redApples);
-		System.out.println(heavyApples);
 
 		assertThat(redApples).hasSize(3);
 		assertThat(heavyApples).hasSize(2);
