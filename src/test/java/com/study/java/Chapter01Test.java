@@ -3,6 +3,7 @@ package com.study.java;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,7 @@ import com.study.java.model.AppleHeavyWeightPredicate;
 public class Chapter01Test {
 
 	List<Apple> apples = new ArrayList<Apple>();
+	List<Integer> numbers = Arrays.asList(1, 2, 4, 6, 7, 8, 9, 10, 12);
 
 	@BeforeEach
 	void setUp() {
@@ -106,5 +108,18 @@ public class Chapter01Test {
 
 		assertThat(redApples).hasSize(3);
 		assertThat(heavyApples).hasSize(2);
+	}
+
+	@Test
+	void filter() {
+		List<Apple> redApples = Apple.filter(apples, apple -> apple.getColor().equals(Color.RED));
+		List<Apple> greenApples = Apple.filter(apples, apple -> apple.getColor().equals(Color.GREEN));
+		List<Apple> heavyApples = Apple.filter(apples, apple -> apple.getWeight() > 150);
+		List<Integer> evenNumber = Apple.filter(numbers, number -> number % 2 == 0);
+
+		assertThat(redApples).hasSize(3);
+		assertThat(greenApples).hasSize(2);
+		assertThat(heavyApples).hasSize(2);
+		assertThat(evenNumber).hasSize(6);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.study.java.enums.Color;
 import com.study.java.interfaces.ApplePredicate;
+import com.study.java.interfaces.Predicate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,6 +57,16 @@ public class Apple {
 		for (Apple apple : inventory) {
 			if (p.test(apple)) {
 				result.add(apple);
+			}
+		}
+		return result;
+	}
+
+	public static <T> List<T> filter(List<T> list, Predicate<T> p) {
+		List<T> result = new ArrayList<T>();
+		for (T t : list) {
+			if (p.test(t)) {
+				result.add(t);
 			}
 		}
 		return result;
