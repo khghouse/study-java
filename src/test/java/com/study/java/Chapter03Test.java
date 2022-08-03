@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,6 +47,11 @@ public class Chapter03Test {
 		System.out.println(nonEmpty);
 	}
 
+	@Test
+	void consumer() {
+		forEach(Arrays.asList(1, 2, 3, 4, 5), (Integer i) -> System.out.println(i));
+	}
+
 	public String processFile() throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader("C:/data.txt"))) {
 			return br.readLine();
@@ -55,6 +61,12 @@ public class Chapter03Test {
 	public String processFile(BufferedReaderProcessor p) throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader("C:/data.txt"))) {
 			return p.process(br);
+		}
+	}
+
+	public <T> void forEach(List<T> list, Consumer<T> c) {
+		for (T t : list) {
+			c.accept(t);
 		}
 	}
 }
