@@ -5,9 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,6 +54,12 @@ public class Chapter03Test {
 		forEach(Arrays.asList(1, 2, 3, 4, 5), (Integer i) -> System.out.println(i));
 	}
 
+	@Test
+	void function() {
+		List<Integer> list = map(Arrays.asList("almbdas", "in", "action"), s -> s.length());
+		System.out.println(list);
+	}
+
 	public String processFile() throws IOException {
 		try (BufferedReader br = new BufferedReader(new FileReader("C:/data.txt"))) {
 			return br.readLine();
@@ -68,5 +76,13 @@ public class Chapter03Test {
 		for (T t : list) {
 			c.accept(t);
 		}
+	}
+
+	public <T, R> List<R> map(List<T> list, Function<T, R> f) {
+		List<R> result = new ArrayList<R>();
+		for (T t : list) {
+			result.add(f.apply(t));
+		}
+		return result;
 	}
 }
