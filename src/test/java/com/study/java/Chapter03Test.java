@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,11 +77,32 @@ public class Chapter03Test {
 	}
 
 	@Test
-	void MethodReference() {
+	void methodReference() {
 		// apples.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
 		apples.sort(comparing(Apple::getWeight));
-		
+
 		System.out.println(apples);
+	}
+
+	@Test
+	void constructorReference() {
+		Supplier<Apple> c1 = Apple::new;
+		Apple a1 = c1.get();
+		assertThat(a1).isNotNull();
+
+		Function<Integer, Apple> c2 = Apple::new;
+		Apple a2 = c2.apply(110);
+		assertThat(a2.getWeight()).isEqualTo(110);
+
+		List<Integer> weights = Arrays.asList(7, 3, 4, 10);
+		List<Apple> apples = this.map(weights, Apple::new);
+		assertThat(apples.size()).isEqualTo(4);
+		assertThat(apples.get(2).getWeight()).isEqualByComparingTo(4);
+
+		BiFunction<Color, Integer, Apple> c3 = Apple::new;
+		Apple a3 = c3.apply(Color.GREEN, 110);
+		assertThat(a3.getColor()).isEqualTo(Color.GREEN);
+		assertThat(a3.getWeight()).isEqualTo(110);
 	}
 
 	public String processFile() throws IOException {

@@ -21,6 +21,11 @@ public class Apple {
 	private Color color;
 	private Integer weight;
 
+	public Apple(Integer weight) {
+		super();
+		this.weight = weight;
+	}
+
 	public static List<Apple> filterGreenApples(final List<Apple> inventory) {
 		List<Apple> result = new ArrayList<Apple>();
 		for (Apple apple : inventory) {
