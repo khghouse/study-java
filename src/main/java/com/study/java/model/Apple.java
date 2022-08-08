@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class Apple {
 
 	private Color color;
-	private int weight;
+	private Integer weight;
 
 	public static List<Apple> filterGreenApples(final List<Apple> inventory) {
 		List<Apple> result = new ArrayList<Apple>();

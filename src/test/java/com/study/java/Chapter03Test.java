@@ -1,5 +1,6 @@
 package com.study.java;
 
+import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.BufferedReader;
@@ -11,16 +12,29 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.study.java.enums.Color;
 import com.study.java.interfaces.BufferedReaderProcessor;
 import com.study.java.interfaces.Predicate;
 import com.study.java.model.Apple;
 
 @ExtendWith(MockitoExtension.class)
 public class Chapter03Test {
+
+	List<Apple> apples = new ArrayList<Apple>();
+
+	@BeforeEach
+	void setUp() {
+		apples.add(Apple.builder().color(Color.RED).weight(40).build());
+		apples.add(Apple.builder().color(Color.GREEN).weight(160).build());
+		apples.add(Apple.builder().color(Color.RED).weight(80).build());
+		apples.add(Apple.builder().color(Color.GREEN).weight(120).build());
+		apples.add(Apple.builder().color(Color.RED).weight(200).build());
+	}
 
 	@Test
 	void processFileTest() throws Exception {
@@ -58,6 +72,14 @@ public class Chapter03Test {
 	void function() {
 		List<Integer> list = map(Arrays.asList("almbdas", "in", "action"), s -> s.length());
 		System.out.println(list);
+	}
+
+	@Test
+	void MethodReference() {
+		// apples.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
+		apples.sort(comparing(Apple::getWeight));
+		
+		System.out.println(apples);
 	}
 
 	public String processFile() throws IOException {
