@@ -23,6 +23,7 @@ import com.study.java.enums.Color;
 import com.study.java.interfaces.BufferedReaderProcessor;
 import com.study.java.interfaces.Predicate;
 import com.study.java.model.Apple;
+import com.study.java.model.AppleComparator;
 
 @ExtendWith(MockitoExtension.class)
 public class Chapter03Test {
@@ -103,6 +104,11 @@ public class Chapter03Test {
 		Apple a3 = c3.apply(Color.GREEN, 110);
 		assertThat(a3.getColor()).isEqualTo(Color.GREEN);
 		assertThat(a3.getWeight()).isEqualTo(110);
+	}
+
+	@Test
+	void LambdaAndMethodReference() {
+		apples.sort(new AppleComparator());
 	}
 
 	public String processFile() throws IOException {
