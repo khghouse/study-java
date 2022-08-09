@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -23,7 +24,6 @@ import com.study.java.enums.Color;
 import com.study.java.interfaces.BufferedReaderProcessor;
 import com.study.java.interfaces.Predicate;
 import com.study.java.model.Apple;
-import com.study.java.model.AppleComparator;
 
 @ExtendWith(MockitoExtension.class)
 public class Chapter03Test {
@@ -108,7 +108,12 @@ public class Chapter03Test {
 
 	@Test
 	void LambdaAndMethodReference() {
-		apples.sort(new AppleComparator());
+		apples.sort(new Comparator<Apple>() {
+			@Override
+			public int compare(Apple a1, Apple a2) {
+				return a1.getWeight().compareTo(a2.getWeight());
+			}
+		});
 	}
 
 	public String processFile() throws IOException {
