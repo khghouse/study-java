@@ -108,7 +108,7 @@ public class Chapter03Test {
 	@Test
 	void LambdaAndMethodReference() {
 		System.out.println("---- apples : " + apples);
-		apples.sort(comparing(apple -> apple.getWeight()));
+		apples.sort(comparing(Apple::getWeight));
 		System.out.println("---- sort : " + apples);
 	}
 
