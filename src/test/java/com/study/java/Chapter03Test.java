@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -108,12 +107,7 @@ public class Chapter03Test {
 
 	@Test
 	void LambdaAndMethodReference() {
-		apples.sort(new Comparator<Apple>() {
-			@Override
-			public int compare(Apple a1, Apple a2) {
-				return a1.getWeight().compareTo(a2.getWeight());
-			}
-		});
+		apples.sort((a1, a2) -> a1.getWeight().compareTo(a2.getWeight()));
 	}
 
 	public String processFile() throws IOException {
