@@ -107,7 +107,9 @@ public class Chapter03Test {
 
 	@Test
 	void LambdaAndMethodReference() {
-		apples.sort((a1, a2) -> a1.getWeight().compareTo(a2.getWeight()));
+		System.out.println("---- apples : " + apples);
+		apples.sort(comparing(apple -> apple.getWeight()));
+		System.out.println("---- sort : " + apples);
 	}
 
 	public String processFile() throws IOException {
